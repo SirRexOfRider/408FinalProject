@@ -2,4 +2,4 @@
 #   ~    ~    ~     ~     ~     ~   Braxton's Battleship   ~   ~   ~   ~   ~   
 # `~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`
 
-Summary can be found [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.txt)
+Summary can be found [here]([https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.txt](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.md))
