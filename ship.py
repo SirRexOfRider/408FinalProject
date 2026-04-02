@@ -29,6 +29,7 @@ class ship:
         
         
     #Helpers
+    #============================= BUILD SHIP OBJECT ========================================================
     def build_ship(self):
         """Build Ship object using pre-defined name and length when Initializing object"""
         
@@ -56,8 +57,7 @@ class ship:
         #After building and setting ship sections, set ship
         self.set_ship_sections(ship_sections)
             
-    #Set the index of a ship section to be hit
-    #(Mark as true for the is_hit value)
+    #============================== HIT SHIP SECTION ======================================================
     def hit_ship_section(self, index):
         """Change the value of a ship section to be True (hit)"""
         modified_ship = self.get_ship_sections()
@@ -69,14 +69,14 @@ class ship:
         self.set_ship_sections(modified_ship)
     
     
-    #Check to see if the ship has no sections that haven't been hit
+    #========================== CHECK IF SUNK =================================================================
     def check_if_sunk(self):
         """Check to see if all sections of the ship are hit"""
         #Sentinel value
         sunk = True
         
         #Get head of ship section (bow)
-        current_section = self.get_ship_sections()[0]
+        current_section = self.get_bow()
         
         #This is where I'm implementing the next DA so I can say I implemented a linked list.. of sorts...
         while (current_section != None):
@@ -91,6 +91,7 @@ class ship:
         #Set sunk boolean value
         self.set_is_sunk(sunk)
         
+    #========================= FIND DISTANCE TO STERN ==================================================
     def find_distance_to_stern(self, ship_segment):
         """Find the amount of steps needed to hit the stern of the ship given a ship segment"""
         

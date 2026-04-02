@@ -14,25 +14,24 @@ class player:
         self.set_my_guess_board(board())
         
     #Helpers
+    #============================= GET USER INPUT =================================================================================
     def get_user_input(self):
-        
-        #Get user input for selecting tiles
-        #Compare with list of options on the board
+        """Get user input for selecting tiles. Validate that it matches options available on the board"""
         
         #Also make sure it's valid
         valid = False
         
         while (not valid):
             
-            ui = input("Enter Tile: ")
-            
-            #Validate string
+            #Get input
+            ui = input("Enter Quadrant (A6, F10, etc): ")
             
             #If user input is two characters long and is valid
             if (len(ui) == 2 and ui[1].isnumeric()):
                 
                 #If input is found within the board margins
-                if ((ui[0] in self.get_my_ship_board().get_column_markers()) and (int(ui[1]) in self.get_my_ship_board().get_row_markers())):
+                #Switch the first character to uppercase, just in case... get it... in.. case because.... i'm tired....
+                if ((ui[0].upper() in self.get_my_ship_board().get_column_markers()) and (int(ui[1]) in self.get_my_ship_board().get_row_markers())):
                     valid = True
                     
                 #Otherwise
@@ -44,7 +43,7 @@ class player:
             elif (len(ui) == 3 and ui[1].isnumeric() and ui[2].isnumeric()):
                 
                 #If input is found within the board margins
-                if (ui[0] in self.get_my_ship_board().get_column_markers() and ui[1] == 1 and ui[2] == 0):
+                if (ui[0].upper() in self.get_my_ship_board().get_column_markers() and int(ui[1]) == 1 and int(ui[2]) == 0):
                     valid = True
                     
                 #Otherwise
@@ -59,27 +58,27 @@ class player:
         return ui
     
     
-    # ======================================= THIS CODE GET'S A LITTLE GROSS SORRY =======================================================
+    # ======================================= DETERMINE SHOT =======================================================
     def determine_shot(self, quadrant):
         """A shot will be taken on this player's board to determine if it hits a ship"""
         
-        #Take input will help verify this before it runs into this function
+        #Get User Input will help verify this before it runs into this function
         coordinates = self.get_my_ship_board().convert_input(quadrant)
         updated_grid = self.get_my_ship_board().get_grid()
         current_tile = self.get_my_ship_board().get_grid()[coordinates[0]][coordinates[1]]
         
         #IF MISS
         if (current_tile == None or current_tile == "~0~~"):
-            print("\t\t   ~~~ M ~~~ M ~~~ M~~~ MISS~~~ M ~~~ M ~~~ M")
+            print("\n\t\t   ~~~ M ~~~ M ~~~ M~~~ MISS ~~~ M ~~~ M ~~~ M ~~~")
             updated_grid[coordinates[0]][coordinates[1]] = "~0~~"
         
         #IF RE-HIT
         elif (current_tile == "~#~~"):
-            print("\t\t   ??? ?? DAMAGED PART WAS HIT.. AGAIN ?? ???")
+            print("\n\t\t\n   ??? ?? DAMAGED PART WAS HIT.. AGAIN ?? ???")
         
         #IF HIT
         else:
-            print("\t\t   !#!$!#!$!#!!#!$! | HIT! | !#!$!#!$!#!!#!$!")
+            print("\n\t\t   !#!$!#!$!#!!#!$! | HIT! | !#!$!#!$!#!!#!$!")
 
             #Find the name of the ship that was hit
             current_ship_index = 0
@@ -96,14 +95,21 @@ class player:
             
             current_ship.hit_ship_section(-current_ship.find_distance_to_stern(current_tile))
             
+            #If the current ship just sunk, also print that out to the user
+            if (current_ship.get_is_sunk()):
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+                print("\t\t    S          U          N          K           !")
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+            
             #Modifided ship list
             modified_ship_list = self.get_my_ships()
             modified_ship_list[current_ship_index] = current_ship
             self.set_my_ships(modified_ship_list)
-            
+
             updated_grid[coordinates[0]][coordinates[1]] = "~X~~"
             
         self.get_my_ship_board().set_grid(updated_grid)
+    #===============================================================================================================================
     
     #Getters
     def get_my_ships(self):

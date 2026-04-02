@@ -6,7 +6,7 @@ class board:
     __row_markers = []
     __column_markers = []
     
-    
+    #Init
     def __init__(self):
         
         #10 X 10 board
@@ -16,11 +16,12 @@ class board:
         self.set_row_markers([1,2,3,4,5,6,7,8,9,10])
         
     #Helpers
+    #================== CONVERT USER INPUT ====================================================
     def convert_input(self, quadrant):
         
         #While we aren't on the same row as the starting_index
         column_index = 0
-        while (self.get_column_markers()[column_index] != quadrant[0]):
+        while (self.get_column_markers()[column_index] != quadrant[0].upper()):
             column_index += 1
         
         #Set starting position of the ship
@@ -41,7 +42,7 @@ class board:
             
         return coordinates
     
-    
+    #============================= SET SHIP ON GRID =========================================================
     def set_ship_on_grid(self, ship = None, quadrant = "", axis = 0):
         """Take in a ship object and try to place it on the grid using the starting index and axis\n
         For the starting index, it will be a string that will be parsed (A6)\n
@@ -124,7 +125,7 @@ class board:
         #Should return 0 if successfull
         return error_value
     
-    
+    #======================== REMOVE SHIP FROM GRID ==============================================================
     def remove_ship_from_grid(self, ship_name):
         """Remove a ship from the board using the name of the ship that was last hit"""
         #Using the ship part that was last hit and destroyed, remove all other ship parts of the same name from the grid
@@ -184,11 +185,7 @@ class board:
                     
                 #If the tile is currently flagged as a miss
                 elif (self.get_grid()[x][y] == "~0~~"):
-                    temp += "~O~~"
-                    
-                #If the ship is destroyed
-                elif (self.get_grid()[x][y] == "~#~~"):
-                    temp += "~#~~"
+                    temp += "~0~~"
                     
                 #If there's a ship at this tile
                 else:

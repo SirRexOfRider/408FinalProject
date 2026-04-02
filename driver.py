@@ -10,11 +10,13 @@ print(me.get_my_ship_board())
 #print(me.get_user_input())
 
 #me.get_my_ship_board().remove_ship_from_grid(me.get_my_ships()[0].get_name())
-print(me.determine_shot("A1"))
-print(me.determine_shot("B1"))
-print(me.determine_shot("C1"))
-print(me.determine_shot("D1"))
-print(me.determine_shot("E1"))
-print(me.get_my_ships()[0])
+
+#So anyways, I started blasting
+while (True):
+    ui = me.get_user_input()
+    me.determine_shot(ui)
+    print(me.get_my_ship_board())
+
+#print(me.get_my_ships()[0])
 
 
