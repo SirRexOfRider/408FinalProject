@@ -2,5 +2,4 @@
 #   ~    ~    ~     ~     ~     ~   Braxton's Battleship   ~   ~   ~   ~   ~   
 # `~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`
 
-#Summary
-\nSummary can be found [here]()
+Summary can be found [here]()
