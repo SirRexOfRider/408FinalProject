@@ -2,6 +2,6 @@
 #   ~    ~    ~     ~     ~     ~   Braxton's Battleship   ~   ~   ~   ~   ~   
 # `~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`
 
-Summary --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.md)
+### Summary --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.md)
 
-Standards and Practices --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/Standards&Practices.md)
+### Standards and Practices --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/standards_and_practices.md)
