@@ -2,4 +2,5 @@
 #   ~    ~    ~     ~     ~     ~   Braxton's Battleship   ~   ~   ~   ~   ~   
 # `~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`
 
-Summary can be found [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.md)
+Summary --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/summary.md)
+Standards and Practices --> [here]()
