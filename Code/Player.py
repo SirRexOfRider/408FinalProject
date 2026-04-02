@@ -15,7 +15,7 @@ class player:
         
     #Helpers
     #============================= GET USER INPUT =================================================================================
-    def get_user_input(self):
+    def get_user_input(self, prompt):
         """Get user input for selecting tiles. Validate that it matches options available on the board"""
         
         #Also make sure it's valid
@@ -24,7 +24,7 @@ class player:
         while (not valid):
             
             #Get input
-            ui = input("Enter Quadrant (A6, F10, etc): ")
+            ui = input(prompt)
             
             #If user input is two characters long and is valid
             if (len(ui) == 2 and ui[1].isnumeric()):
@@ -69,16 +69,16 @@ class player:
         
         #IF MISS
         if (current_tile == None or current_tile == "~0~~"):
-            print("\n\t\t   ~~~ M ~~~ M ~~~ M~~~ MISS ~~~ M ~~~ M ~~~ M ~~~")
+            print("\n\t\t ~~~ M ~~~ M ~~~ M~~~ MISS ~~~ M ~~~ M ~~~ M ~~~")
             updated_grid[coordinates[0]][coordinates[1]] = "~0~~"
         
         #IF RE-HIT
-        elif (current_tile == "~#~~"):
-            print("\n\t\t\n   ??? ?? DAMAGED PART WAS HIT.. AGAIN ?? ???")
+        elif (current_tile == "~X~~"):
+            print("\n\t\t    ??? ?? DAMAGED PART WAS HIT.. AGAIN ?? ???")
         
         #IF HIT
         else:
-            print("\n\t\t   !#!$!#!$!#!!#!$! | HIT! | !#!$!#!$!#!!#!$!")
+            print("\n\t\t! ! ! ! ! ! ! ! ! ! | HIT ! | ! ! ! ! ! ! ! ! ! !")
 
             #Find the name of the ship that was hit
             current_ship_index = 0
@@ -89,17 +89,14 @@ class player:
             while current_ship.get_name() != current_tile.get_part_of():
                 current_ship_index += 1
                 current_ship = self.get_my_ships()[current_ship_index]
-                
-            # print(current_ship.get_name())
-            # print(current_ship.find_distance_to_stern(current_tile))
             
             current_ship.hit_ship_section(-current_ship.find_distance_to_stern(current_tile))
             
             #If the current ship just sunk, also print that out to the user
             if (current_ship.get_is_sunk()):
-                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
-                print("\t\t    S          U          N          K           !")
-                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+                print("\t\t  S          U          N          K           !")
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
             
             #Modifided ship list
             modified_ship_list = self.get_my_ships()

@@ -106,7 +106,7 @@ class board:
                     #Check to see if all tiles are open vertically (not None)
                     for x in range(ship.get_length()):
                         
-                        if (self.get_grid()[coordinates[0]][coordinates[0]+ x - 1] != None):
+                        if (self.get_grid()[coordinates[0]][coordinates[0] + x - 1] != None):
                             print("ERROR: Ship collides with another entity")
                             error_value = 2
                             valid = False
