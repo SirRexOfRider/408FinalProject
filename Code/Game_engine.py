@@ -1,5 +1,3 @@
-from Ship import ship
-from Board import board
 from Player import player
 from Bot import bot
 
@@ -9,11 +7,14 @@ class game_engine:
     __player = None
     __bot = None
     
+    #Init
     def __init__(self):
         self.set_player(player())
         self.set_bot(bot())
 
 
+    #Helpers
+    #========================= SET PLAYER BOARD ================================================================
     def set_player_board(self):
         """Player will set ships on their grid using user input"""
         
@@ -58,7 +59,8 @@ class game_engine:
                 
                 else:
                     iteration_count -= 1
-                    
+          
+    #======================= PLAY GAME =========================================================          
     def play_game(self):
         pass
 
