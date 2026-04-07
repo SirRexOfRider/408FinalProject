@@ -18,20 +18,27 @@ class game_engine:
     def set_player_board(self):
         """Player will set ships on their grid using user input"""
         
-        #Determine which way the ship will be placed
-        axis = 0
-        
         #Kepp track of what ship we're on
         iteration_count = 0
         
         #For as many ships in their ship_list
         while (iteration_count < len(self.get_player().get_my_ships())):
             
+            #Determine which way the ship will be placed
+            axis = -1
+            
             #Get quadrant from user
             ui = self.get_player().get_user_input(f"Enter quadrant to place ship |{self.get_player().get_my_ships()[iteration_count].get_name()}|: ")
             
-            #Ask for axis
-            axis = int(input("Axis? (0 Horiz, 1 Vert): "))
+            
+            try:
+                #Ask for axis
+                axis = int(input("Axis? (0 Horiz, 1 Vert): "))
+                
+            except Exception as e:
+                pass
+                
+                
             
             #If axis is vaild
             if (axis == 0 or axis == 1):
@@ -45,6 +52,8 @@ class game_engine:
                     
                 #Otherwise, set ship and go to the next in the list
                 else:
+                    
+                    print("HERE")
                     self.set_player(self.get_player())
                     print(self.get_player().get_my_ship_board())
                     iteration_count += 1
@@ -52,13 +61,6 @@ class game_engine:
             #Otherwise
             else:
                 print("ERROR: AXIS ERROR")
-                
-                #To make sure we don't go into negative indexing
-                if (iteration_count == 0):
-                    pass
-                
-                else:
-                    iteration_count -= 1
           
     #======================= PLAY GAME =========================================================          
     def play_game(self):

@@ -21,6 +21,7 @@ class board:
         
         #While we aren't on the same row as the starting_index
         column_index = 0
+        
         while (self.get_column_markers()[column_index] != quadrant[0].upper()):
             column_index += 1
         
@@ -77,7 +78,7 @@ class board:
                     #Check to see if all tiles are open horizontally (not None)
                     for x in range(ship.get_length()):
                         
-                        if (self.get_grid()[coordinates[0]][coordinates[1]+x] != None):
+                        if (self.get_grid()[coordinates[0]][coordinates[1] + x] != None):
                             print("ERROR: Ship collides with another entity")
                             error_value = 2
                             valid = False
@@ -86,7 +87,7 @@ class board:
                 if valid:
                     updated_grid = self.get_grid()
                     for x in range(ship.get_length()):
-                        updated_grid[coordinates[0]][coordinates[1]+x] = ship.get_ship_sections()[x]
+                        updated_grid[coordinates[0]][coordinates[1] + x] = ship.get_ship_sections()[x]
                         
                     self.set_grid(updated_grid)
             
@@ -96,17 +97,22 @@ class board:
                 valid = True
                 
                 #Check if there's enough room for the ship horizontally
-                #This part needs to be up to 11 since we're technically starting at 1 instead of 0
-                if (coordinates[0] + ship.get_length() > 11):
+                print(coordinates[0])
+                print(ship.get_length())
+                print()
+                
+                if (coordinates[0] + ship.get_length() > 10):
                     print("ERROR: Ship is out of bounds of Board Vertically")
                     error_value = 1
                     valid = False
                 
                 if valid:
+                    
                     #Check to see if all tiles are open vertically (not None)
                     for x in range(ship.get_length()):
                         
-                        if (self.get_grid()[coordinates[0]][coordinates[0] + x - 1] != None):
+                        if (self.get_grid()[coordinates[0] + x][coordinates[1]] != None):
+                            print(self.get_grid()[coordinates[0] + x][coordinates[1]])
                             print("ERROR: Ship collides with another entity")
                             error_value = 2
                             valid = False
@@ -117,6 +123,10 @@ class board:
                     updated_grid = self.get_grid()
                     
                     for x in range(ship.get_length()):
+                        
+                        print(coordinates[0] + x)
+                        print(coordinates[1])
+                        print("COORDS: \n")
                         updated_grid[coordinates[0] + x][coordinates[1]] = ship.get_ship_sections()[x]
                         
                     self.set_grid(updated_grid)
