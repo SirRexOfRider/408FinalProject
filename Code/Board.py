@@ -96,10 +96,10 @@ class board:
                 #Flag value to see if the ship positioning is good
                 valid = True
                 
-                #Check if there's enough room for the ship horizontally
-                print(coordinates[0])
-                print(ship.get_length())
-                print()
+                # Check if there's enough room for the ship horizontally
+                # print(coordinates[0])
+                # print(ship.get_length())
+                # print()
                 
                 if (coordinates[0] + ship.get_length() > 10):
                     print("ERROR: Ship is out of bounds of Board Vertically")
@@ -112,7 +112,6 @@ class board:
                     for x in range(ship.get_length()):
                         
                         if (self.get_grid()[coordinates[0] + x][coordinates[1]] != None):
-                            print(self.get_grid()[coordinates[0] + x][coordinates[1]])
                             print("ERROR: Ship collides with another entity")
                             error_value = 2
                             valid = False
@@ -124,9 +123,9 @@ class board:
                     
                     for x in range(ship.get_length()):
                         
-                        print(coordinates[0] + x)
-                        print(coordinates[1])
-                        print("COORDS: \n")
+                        # print(coordinates[0] + x)
+                        # print(coordinates[1])
+                        # print("COORDS: \n")
                         updated_grid[coordinates[0] + x][coordinates[1]] = ship.get_ship_sections()[x]
                         
                     self.set_grid(updated_grid)

@@ -26,8 +26,7 @@ class ship:
         self.set_length(length)
         self.set_is_sunk(False)
         self.build_ship()
-        
-        
+          
     #Helpers
     #============================= BUILD SHIP OBJECT ========================================================
     def build_ship(self):
@@ -46,8 +45,6 @@ class ship:
         
         self.set_stern(ship_sections[self.get_length() - 1])
         
-        
-            
         #After building, link sections together using the next DA in ship sections
         current_index = 0
         while (current_index < self.get_length() - 1):
