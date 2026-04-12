@@ -7,5 +7,7 @@
 
 ## 4/6/2026 - 4/12/2026
 - Had to fix some bugs with placing ships on the board
+- Made bot class that derives from the player class
+- Implemented a static search function for the bot
 
 -Back to [Homepage](https://github.com/SirRexOfRider/408FinalProject/tree/main)
