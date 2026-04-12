@@ -13,7 +13,6 @@ class game_engine:
         self.set_player(player())
         self.set_bot(bot())
 
-
     #Helpers
     #========================= SET PLAYER BOARD ================================================================
     def set_player_board(self):
@@ -30,7 +29,6 @@ class game_engine:
             
             #Get quadrant from user
             ui = self.get_player().get_user_input(f"Enter quadrant to place ship |{self.get_player().get_my_ships()[iteration_count].get_name()}|: ")
-            
             
             try:
                 #Ask for axis
@@ -51,8 +49,7 @@ class game_engine:
                     
                 #Otherwise, set ship and go to the next in the list
                 else:
-                    
-                    print("HERE")
+                
                     self.set_player(self.get_player())
                     print(self.get_player().get_my_ship_board())
                     iteration_count += 1
@@ -81,9 +78,6 @@ class game_engine:
             axis = randint(0,1)
             
             gen_quadrant = f"{str(self.get_bot().get_my_ship_board().get_column_markers()[num1])}" + f"{str(self.get_bot().get_my_ship_board().get_row_markers()[num2])}"
-            
-            #print(gen_quadrant)
-            #ui = input("Testing")
             
             #If axis is vaild
             if (axis == 0 or axis == 1):
@@ -119,14 +113,11 @@ class game_engine:
         ship_found = False
         
         #Search space
-        search_space = self.get_bot().get_my_guess_board()
+        search_space = self.get_bot().get_search_space()
+        guess = search_space.pop(0)
         
-        #Take a shot on the next index in search space
         
-        
-         
-        pass
-    
+        return guess
     
     def ship_hunt_static(self):
         """Hunt down a ship once one is detected, return a value to determine which state the bot is in"""
