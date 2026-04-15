@@ -12,7 +12,7 @@ class player:
         self.set_my_ships([ship("ACC", 5), ship("BAT", 4), ship("DST", 3), ship("SUB", 3), ship("PTR", 2)])
         self.set_my_ship_board(board())
         self.set_my_guess_board(board())
-        
+    
     #Helpers
     #============================= GET USER INPUT =================================================================================
     def get_user_input(self, prompt):
@@ -130,6 +130,30 @@ class player:
         #Return the result of the shot
         return result
     #===============================================================================================================================
+    
+    def update_guess_board(self, quadrant, shot_determination):
+        """Using the input and shot determination, update this entity's guess board"""
+        
+        #Convert the quadrant into usable indexes and make a grid to be set
+        coordinates = self.get_my_ship_board().convert_input(quadrant)
+        updated_grid = self.get_my_guess_board().get_grid()
+        
+        
+        if (shot_determination == 0):
+            updated_grid[coordinates[0]][coordinates[1]] = "~0~~"
+        
+        #IF RE-HIT
+        elif (shot_determination == 1):
+            pass
+        
+        #IF HIT OR SUNK
+        else:
+            updated_grid[coordinates[0]][coordinates[1]] = "~X~~"
+            
+            
+        #Set board to modified board
+        self.get_my_guess_board().set_grid(updated_grid)
+            
     
     #Getters
     def get_my_ships(self):

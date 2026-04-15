@@ -18,7 +18,7 @@ class board:
     #Helpers
     #================== CONVERT USER INPUT ====================================================
     def convert_input(self, quadrant):
-        
+        """Convert the incoming quadrant into usable index values"""
         #While we aren't on the same row as the starting_index
         column_index = 0
         

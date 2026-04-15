@@ -7,11 +7,13 @@ class game_engine:
     #DATA ATTRIBUTES
     __player = None
     __bot = None
+    __game_over = 0
     
     #Init
     def __init__(self):
         self.set_player(player())
         self.set_bot(bot())
+        self.set_game_over(0)
 
     #Helpers
     #========================= SET PLAYER BOARD ================================================================
@@ -101,27 +103,42 @@ class game_engine:
                 print("ERROR: AXIS ERROR")
                 
     #========================================== BOT GAME LOGIC ==============================================================                
-    def bot_guess(self):
-        """Using information based on previous guesses, make a shot on the opponent's board"""
-        pass
-    
-
     def ship_search_static(self):
-        """Search in diagonal lines to find player ships, return a value to determine which state the bot is in"""
+        """Search in diagonal lines to find player ships, return a quadrant to shoot"""
         
-        #Flag to determine if a ship has been detected
-        ship_found = False
-        
-        #Search space
+        #Search the space diagonally and update the search space list for the bot
         search_space = self.get_bot().get_search_space()
         guess = search_space.pop(0)
+        self.get_bot().set_search_space(search_space)
         
+        #Also add the guess to the previously guessed list
+        temp_list = self.get_bot().get_previous_guesses()
+        temp_list.append(guess)
+        self.get_bot().set_previous_guesses(temp_list)
         
+        #Return the guess
         return guess
     
     def ship_hunt_static(self):
-        """Hunt down a ship once one is detected, return a value to determine which state the bot is in"""
-        pass
+        """Hunt down a ship once one is detected, return a quadrant to shoot"""
+        
+        #Search the surrounding quadrants
+        hunt_queue = self.get_bot().get_hunt_queue()
+        guess = hunt_queue.pop(0)
+        self.get_bot().set_hunt_queue(hunt_queue)
+        
+        #Also add these guesses to the previously guessed list
+        temp_list = self.get_bot().get_previous_guesses()
+        temp_list.append(guess)
+        self.get_bot().set_previous_guesses(temp_list)
+        
+        #Finally, remove this guess from the static search list
+        search_space = self.get_bot().get_search_space()
+        search_space.remove(guess)
+        self.get_bot().set_search_space(search_space)
+        
+        
+        return guess
           
     #======================= PLAY GAME =========================================================          
     def play_game(self):
@@ -133,6 +150,9 @@ class game_engine:
 
     def get_bot(self):
         return self.__bot
+    
+    def get_game_over(self):
+        return self.__game_over
 
     #Setters
     def set_player(self, p):
@@ -140,3 +160,6 @@ class game_engine:
 
     def set_bot(self, b):
         self.__bot = b
+
+    def set_game_over(self, go):
+        return self.__game_over
