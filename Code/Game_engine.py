@@ -120,7 +120,7 @@ class game_engine:
         return guess
     
     def ship_hunt_static(self):
-        """Hunt down a ship once one is detected, return a quadrant to shoot"""
+        """Hunt down a ship once one is detected, return a quadrant to shoot. Will hunt clockwise [L-T-R-B]"""
         
         #Search the surrounding quadrants
         hunt_queue = self.get_bot().get_hunt_queue()

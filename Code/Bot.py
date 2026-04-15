@@ -20,6 +20,7 @@ class bot(player):
         self.set_is_hunting(False)
         
     #Helpers
+    #================ GENERATE SEARCH SPACE =========================================================================
     def generate_search_space_static(self):
         """Generate a seach space for the bot."""
         temp_space = []
@@ -51,6 +52,7 @@ class bot(player):
         #print(temp_space)
         self.set_search_space(temp_space)
         
+    #======================================= UPDATE HUNT QUEUE ==========================================================================   
     def update_hunt_queue(self, shot_determination):
         """Update the hunting queue based on the shot determination"""
         
@@ -78,8 +80,8 @@ class bot(player):
             #Modify the coordinates
             left[1] = left[1] - 1
             top[0] = top[0] - 1
-            right[1] = right[1] + 1
-            bottom[0] = bottom[0] + 1
+            right[1] = (right[1] + 1) % 10
+            bottom[0] = (bottom[0] + 1) % 10
             
             # print(self.get_my_ship_board().convert_input(previous_guess))
             # print(left)
@@ -91,13 +93,12 @@ class bot(player):
             temp_queue = self.get_hunt_queue()
             
             # == Verify to make sure the coordinates aren't out of bounds of the board or already haven't been guessed ==
-            #Warning: Because I confused myself with the indexing of the board, this is technically backwards so...
+            #Warning: The indexes seem backwards because of how the convert_input is currently outputing (column, row)
             
             #If the left quadrant is valid and hasn't been searched yet AND not currently in the queue
             left_quadrant = f"{str(self.get_my_ship_board().get_column_markers()[left[1]])}" + f"{str(self.get_my_ship_board().get_row_markers()[left[0]])}"
             if ((left[1] >= 0 ) and (self.get_my_guess_board().get_grid()[left[0]][left[1]] == None) and (left_quadrant not in self.get_hunt_queue())):
                 temp_queue.append(left_quadrant)
-                
                 
             #If the top quadrant is valid and hasn't been searched yet AND not currently in the queue
             top_quadrant = f"{str(self.get_my_ship_board().get_column_markers()[top[1]])}" + f"{str(self.get_my_ship_board().get_row_markers()[top[0]])}"
@@ -114,7 +115,6 @@ class bot(player):
             if ((bottom[0] <= 9) and (self.get_my_guess_board().get_grid()[bottom[0]][bottom[1]] == None) and (bottom_quadrant not in self.get_hunt_queue())):
                 temp_queue.append(bottom_quadrant)
                 
-            
             #Troubleshooting  
             # print(f"Left: {str(self.get_my_ship_board().get_column_markers()[left[1]])}" + f"{str(self.get_my_ship_board().get_row_markers()[left[0]])}")
             # print(f"Top: {str(self.get_my_ship_board().get_column_markers()[top[1]])}" + f"{str(self.get_my_ship_board().get_row_markers()[top[0]])}")
@@ -123,8 +123,7 @@ class bot(player):
             # print(f"Queue: {temp_queue}")
             
             self.set_hunt_queue(temp_queue)
-            
-
+        
         #If we're done hunting
         elif (shot_determination == 4):
             
@@ -148,7 +147,6 @@ class bot(player):
     
     def get_is_hunting(self):
         return self.__is_hunting
-    
     
     #Setters
     def set_search_space(self, ss):
