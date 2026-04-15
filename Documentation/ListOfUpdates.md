@@ -10,4 +10,9 @@
 - Made bot class that derives from the player class
 - Implemented a static search function for the bot
 
+## 4/14/2026 - 4/19/2026
+- Added DA to the bot like previously guessed, hunt_queue, and is_hunting
+- Added a hunt function for when the bot detects a ship
+- Added a swtich (is_hunting) for the bot to change states depending on the shot determination
+
 -Back to [Homepage](https://github.com/SirRexOfRider/408FinalProject/tree/main)
