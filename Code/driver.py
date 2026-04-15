@@ -14,7 +14,6 @@ def main():
     #While the game is running
     while True:
         
-        
         #================ PLAYER ================================
         #ui = game.get_player().get_user_input("Enter a Quadrant [A5, B10, etc]: ")
         #shot_determination = game.get_bot().determine_shot(ui)
