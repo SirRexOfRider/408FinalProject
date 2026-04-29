@@ -15,7 +15,7 @@
 - Added a hunt function for when the bot detects a ship
 - Added a swtich (is_hunting) for the bot to change states depending on the shot determination
 
-## 4/20/26 = 4/26/2026
+## 4/20/26 - 4/26/2026
 - Literally nothing... Got caught up in other assignments...
 
 ## 4/27/2026 - END
