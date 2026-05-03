@@ -37,6 +37,7 @@ class ship:
         
         #For as many ship parts that are needed
         for x in range(self.get_length()):
+            
             #Make new parts and add them to the ship list
             ship_sections.append(ship_section(self.get_name()))
             

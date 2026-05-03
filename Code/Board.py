@@ -18,7 +18,9 @@ class board:
     #Helpers
     #================== CONVERT USER INPUT ====================================================
     def convert_input(self, quadrant):
+        
         """Convert the incoming quadrant into usable index values"""
+        
         #While we aren't on the same row as the starting_index
         column_index = 0
         
@@ -45,6 +47,7 @@ class board:
     
     #============================= SET SHIP ON GRID =========================================================
     def set_ship_on_grid(self, ship = None, quadrant = "", axis = 0):
+        
         """Take in a ship object and try to place it on the grid using the starting index and axis\n
         For the starting index, it will be a string that will be parsed (A6)\n
         For the axis value, 0 is horizontal and 1 is vertical"""
@@ -90,7 +93,8 @@ class board:
                         updated_grid[coordinates[0]][coordinates[1] + x] = ship.get_ship_sections()[x]
                         
                     self.set_grid(updated_grid)
-            
+                    
+            #If the ship is vertical
             elif (axis == 1):
                 
                 #Flag value to see if the ship positioning is good

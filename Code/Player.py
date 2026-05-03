@@ -61,10 +61,10 @@ class player:
     # ======================================= DETERMINE SHOT =======================================================
     def determine_shot(self, quadrant):
         
+        """A shot will be taken on this entity's board to determine if it hits a ship"""
+        
         #Flag value that determines shot
         result = -1
-        
-        """A shot will be taken on this entity's board to determine if it hits a ship"""
         
         #Get User Input will help verify this before it runs into this function
         coordinates = self.get_my_ship_board().convert_input(quadrant)

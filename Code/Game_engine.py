@@ -94,7 +94,7 @@ class game_engine:
                 #Otherwise, set ship and go to the next in the list
                 else:
                     
-                    self.set_player(self.get_bot())
+                    self.set_bot(self.get_bot())
                     #print(self.get_bot().get_my_ship_board())
                     iteration_count += 1
                 
@@ -124,7 +124,16 @@ class game_engine:
         
         #Search the surrounding quadrants
         hunt_queue = self.get_bot().get_hunt_queue()
-        guess = hunt_queue.pop(0)
+        
+        #In case the hunt queue is somehow empty
+        #Most likely caused by ship stacking
+        #This usually doesn't happen, but just in case
+        if (len(hunt_queue) == 0):
+            guess = self.get_bot().get_search_space()[0]
+        
+        else :  
+            guess = hunt_queue.pop(0)
+            
         self.get_bot().set_hunt_queue(hunt_queue)
         
         #Also add these guesses to the previously guessed list
@@ -139,11 +148,58 @@ class game_engine:
         
         
         return guess
-          
-    #======================= PLAY GAME =========================================================          
-    def play_game(self):
-        pass
-
+              
+    def determine_winner(self):
+        """Go through all of the player and ships bots each time a shot is fired to see if someone won"""
+        
+        #This will be the main flag that is returned
+        output = -1
+        
+        #temp counter to help count the amount of ships sunk
+        temp = 0
+        
+        #Go through all of the player's ships
+        for x in range(len(self.get_player().get_my_ships())):
+            
+            if (self.get_player().get_my_ships()[x].get_is_sunk()):
+                temp+=1
+                
+        #If all ships are sunk
+        if (temp == len(self.get_player().get_my_ships())):
+            
+            #Player loses
+            output = 0
+            
+        #Reset temp
+        temp = 0
+        
+        #Go through all of the bot's ships
+        for x in range(len(self.get_bot().get_my_ships())):
+            
+            if (self.get_bot().get_my_ships()[x].get_is_sunk()):
+                #print("SHIP FOUND SUNKEN")
+                temp+=1
+                
+        #If all ships are sunk
+        if (temp == len(self.get_bot().get_my_ships())):
+            
+            #Bot loses
+            output = 1
+            
+        #Return who won
+        return output
+    
+    def end_game(self, who_won_value):
+        """END GAME if the value is 0 or 1"""
+        
+        temp = ""
+        if who_won_value == 0:
+            temp="\nBOT WINS!!!"
+        elif who_won_value == 1:
+            temp="\nPLAYER WINS!!!"
+        
+        
+        return temp
     #Getters
     def get_player(self):
         return self.__player
