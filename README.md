@@ -14,8 +14,6 @@
 
 ### Powerpoint --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/Documentation/Battleship!.pdf)
 
-
-##
 ## CODE
 
 ### Code folder --> [here](https://github.com/SirRexOfRider/408FinalProject/tree/main/Code)
