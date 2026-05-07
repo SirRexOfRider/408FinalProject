@@ -19,6 +19,9 @@
 - Literally nothing... Got caught up in other assignments...
 
 ## 4/27/2026 - END
-
+- Completed the console verison of the assignment
+- Troubleshooted and fixed all the bugs I was finding in the console version
+- Started GUI development
+- Made a half-working GUI, but it does have music!
 
 -Back to [Homepage](https://github.com/SirRexOfRider/408FinalProject/tree/main)
