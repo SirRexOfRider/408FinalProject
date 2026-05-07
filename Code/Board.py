@@ -30,7 +30,7 @@ class board:
         #Set starting position of the ship
         #These values are technically swapped from A6 to 6A (row -> column)
        
-        #If the length of the string is 3 (meaning the number value is 10)
+        #If the length of the string is 3 (meaning the number value is 10 or higher)
         if (len(quadrant) == 3):
             coordinates = [10 - 1, column_index]
             
@@ -207,5 +207,44 @@ class board:
             temp += "|  |"
                     
         temp += "\n\t\t=================================================\n"
+        
+        return temp
+    
+    
+    def __strGUI__(self):
+        temp = "\n\t===============================================\n"
+        temp += "\t===============================================\n"
+        
+        temp += "\t|    |   A   |   B   |   C   |   D   |   E   |   F   |   G   |   H   |   I   |   J    |    |"
+        
+        #For every row
+        for x in range(10):
+            #If at the end of the rows, this line requires a bit of modifying
+            if (x == 9):
+                temp += f"\n\t|10|"
+            else:      
+                temp += f"\n\t| {self.get_row_markers()[x]} |"
+            #For every column in row
+            for y in range(10):
+                
+                #If the current tile is None
+                if (self.get_grid()[x][y] == None):
+                    temp += "~~~~"
+                    
+                #If this tile is currently flagged as hit
+                elif (self.get_grid()[x][y] == "~X~~"):
+                    temp += "~X~~"
+                    
+                #If the tile is currently flagged as a miss
+                elif (self.get_grid()[x][y] == "~0~~"):
+                    temp += "~0~~"
+                    
+                #If there's a ship at this tile
+                else:
+                    temp += f"{self.get_grid()[x][y].get_part_of()}~"
+                    
+            temp += "|    |"
+                    
+        temp += "\n\t===============================================\n"
         
         return temp

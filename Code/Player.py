@@ -58,7 +58,81 @@ class player:
         return ui
     
     
-    # ======================================= DETERMINE SHOT =======================================================
+    # ======================================= DETERMINE SHOT (GUI)=======================================================
+    def determine_shot_GUI(self, quadrant):
+        
+        """A shot will be taken on this entity's board to determine if it hits a ship\nLiterally the same function as before
+        I have to adjust how the function interacts with the board BECAUSE THE STUPID GUI IS STUIPD!"""
+        
+        #Flag value that determines shot
+        result = -1
+        
+        #Get User Input will help verify this before it runs into this function
+        coordinates = self.get_my_ship_board().convert_input(quadrant)
+        updated_grid = self.get_my_ship_board().get_grid()
+        current_tile = self.get_my_ship_board().get_grid()[coordinates[0]][coordinates[1]]
+        
+        
+        #IF MISS
+        if (current_tile == None or current_tile == "~~0~"):
+            print("\n\t\t ~~~ M ~~~ M ~~~ M~~~ MISS ~~~ M ~~~ M ~~~ M ~~~")
+            updated_grid[coordinates[0]][coordinates[1]] = "~~0~"
+            
+            #If miss
+            result = 0
+        
+        #IF RE-HIT
+        elif (current_tile == "~~X~"):
+            print("\n\t\t    ??? ?? DAMAGED PART WAS HIT.. AGAIN ?? ???")
+            
+            #If damaged part was hit again for some reason
+            result = 1
+            
+        #IF HIT
+        else:
+            print("\n\t\t! ! ! ! ! ! ! ! ! ! | HIT ! | ! ! ! ! ! ! ! ! ! !")
+
+            #Find the name of the ship that was hit
+            current_ship_index = 0
+            
+            current_ship = self.get_my_ships()[current_ship_index]
+            
+            #While we haven't found the name of the ship that was hit, keep iterating until we do
+            while current_ship.get_name() != current_tile.get_part_of():
+                current_ship_index += 1
+                current_ship = self.get_my_ships()[current_ship_index]
+            
+            #Hit the ship section
+            current_ship.hit_ship_section(-current_ship.find_distance_to_stern(current_tile))
+            
+            #If hit
+            result = 3
+            
+            #If the current ship just sunk, also print that out to the user
+            if (current_ship.get_is_sunk()):
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+                print("\t\t  S          U          N          K           !")
+                print("\t\t~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`~`")
+                
+                #If sunk
+                result = 4
+            
+            #Modifided ship list
+            modified_ship_list = self.get_my_ships()
+            modified_ship_list[current_ship_index] = current_ship
+            self.set_my_ships(modified_ship_list)
+
+            updated_grid[coordinates[0]][coordinates[1]] = "~~X~"
+            
+        #Set board to modified board
+        self.get_my_ship_board().set_grid(updated_grid)
+        
+        
+        #Return the result of the shot
+        return result
+    
+    
+    
     def determine_shot(self, quadrant):
         
         """A shot will be taken on this entity's board to determine if it hits a ship"""

@@ -60,6 +60,38 @@ class game_engine:
             else:
                 print("ERROR: AXIS ERROR")
                 
+                
+                
+                #========================= SET PLAYER BOARD ================================================================
+    def set_player_board_GUI(self, quadrant, axis):
+        """Player will set ships on their grid using user input\nThis version of the function is for the GUI\nReturn a value to print to the console if error"""
+        
+        error = ""
+        
+        try:
+            #Ask for axis
+            axis = int(input("Axis? (0 Horiz, 1 Vert): "))
+            
+        except Exception as e:
+            error += "\nAXIS INVALID"
+            
+        #If axis is vaild
+        if (axis == 0 or axis == 1):
+            
+            #Try setting the ship at that tile, return error value
+            error_value = self.get_player().get_my_ship_board().set_ship_on_grid(self.get_player().get_my_ships()[iteration_count], quadrant, axis)
+            
+            #If there was an error, don't set ship
+            if (error_value != 0):
+                error += "\nERROR SETTING SHIP"
+                
+            #Otherwise, set ship and go to the next in the list
+            else:
+            
+                self.set_player(self.get_player())
+            
+        return error
+                
     #========================= SET BOT BOARD ==========================================
     def set_bot_board(self):
         """Bot will set ships on their grid using randomly generated input"""
