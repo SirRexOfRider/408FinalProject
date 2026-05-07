@@ -10,6 +10,10 @@
 
 ### List of Updates --> [here](https://github.com/SirRexOfRider/408FinalProject/blob/main/Documentation/ListOfUpdates.md)
 
+### Simple UML --> [here]()
+
+###Powerpoint --> [here]()
+
 
 ##
 ## CODE
